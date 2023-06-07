@@ -37,30 +37,31 @@ delete from actor where actor_id = 201 and first_name = 'chuck'
 -------------------------------
 
 --Listar todas las “rental” con los datos del “customer” dado un año y mes.
-select
-	customer.first_name,
-	customer.last_name,
-	customer.customer_id,
-	rental.rental_id,
-	rental.rental_date,
-	customer.store_id,
-	customer.email,
-	customer.address_id,
-	customer.create_date
-from
-	rental
-join customer on
-	rental.customer_id = customer.customer_id
-where
-	extract(year
-from
-	r.rental_date) = 2023
-	and extract(month
-from
-	r.rental_date) = 6;
+SELECT
+    customer.first_name,
+    customer.last_name,
+    customer.customer_id,
+    rental.rental_id,
+    rental.rental_date,
+    customer.store_id,
+    customer.email,
+    customer.address_id,
+    customer.create_date
+FROM
+    rental
+JOIN customer ON rental.customer_id = customer.customer_id
+WHERE
+    EXTRACT(YEAR FROM rental.rental_date) = 2005
+    AND EXTRACT(MONTH FROM rental.rental_date) = 6;
  
 --Listar Número, Fecha (payment_date) y Total (amount) de todas las “payment”
 SELECT payment_id, payment_date, amount FROM payment;
 
  --Listar todas las “film” del año 2006 que contengan un (rental_rate) mayor a 4.0.
 select * from film where release_year = 2006 and rental_rate > 4.0;
+
+/*Realiza un Diccionario de datos que contenga el nombre de las tablas y columnas, si
+éstas pueden ser nulas, y su tipo de dato correspondiente*/
+SELECT c.table_name AS tabla, c.column_name AS columna, c.is_nullable, c.data_type
+FROM information_schema.columns c
+WHERE c.table_schema = 'public';

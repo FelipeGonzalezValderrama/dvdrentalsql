@@ -56,8 +56,12 @@ WHERE
  
 --Listar Número, Fecha (payment_date) y Total (amount) de todas las “payment”
 SELECT payment_id, payment_date, amount FROM payment;
+--Listar Número, Fecha (payment_date) y Total (amount) de todas las “payment”
+SELECT DATE(payment_date) AS fecha, COUNT(*) AS cantidad_pagos, SUM(amount) AS total_pagado
+FROM payment
+GROUP BY DATE(payment_date);
 
- --Listar todas las “film” del año 2006 que contengan un (rental_rate) mayor a 4.0.
+--Listar todas las “film” del año 2006 que contengan un (rental_rate) mayor a 4.0.
 select * from film where release_year = 2006 and rental_rate > 4.0;
 
 /*Realiza un Diccionario de datos que contenga el nombre de las tablas y columnas, si
